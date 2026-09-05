@@ -1,0 +1,18 @@
+[project]
+name = "mini-kv-store"
+version = "0.1.0"
+description = "A small HTTP key-value store backed by PostgreSQL."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "psycopg",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "httpx",
+    "ruff",
+    "mypy",
+]
