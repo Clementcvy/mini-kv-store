@@ -42,3 +42,7 @@ updated_at TIMESTAMPTZ NOT NULL
 - dashboard
 - full monitoring
 
+6. Use of the app
+
+- cp .env.example .env
+
