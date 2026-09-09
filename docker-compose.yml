@@ -1,15 +1,31 @@
 services:
   postgres:
     image: postgres:17
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_DB: mini_kv_store
       POSTGRES_USER: kvstore
       POSTGRES_PASSWORD: kvstore
-    ports:
-      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U kvstore -d mini_kv_store" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://kvstore:kvstore@postgres:5432/mini_kv_store
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
   postgres_data:
