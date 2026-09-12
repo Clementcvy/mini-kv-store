@@ -1,5 +1,5 @@
-from kvstore.repository import Repository
 from kvstore.db import get_connection
+from kvstore.repository import Repository
 
 
 def test_queries():
