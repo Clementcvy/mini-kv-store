@@ -2,8 +2,8 @@
 
 import psycopg
 
-from kvstore.config import Config
+from kvstore.config import get_database_url
 
 
 def get_connection():
-    return psycopg.connect(Config.DATABASE_URL)
+    return psycopg.connect(get_database_url())
