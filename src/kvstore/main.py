@@ -43,7 +43,7 @@ def put(key, body: SetValueRequest):
         logger.warning("event=invalid_value_error key=%s", key)
         raise HTTPException(status_code=400, detail="Bad Request")
     except Error:
-        logger.error("event=database_error operation=set")
+        logger.exception("event=database_error operation=set key=%s", key)
         raise HTTPException(status_code=500, detail="Internal Server Error")
     logger.info("event=kv_set key=%s", key)
     return KeyValueResponse(key=key, value=body.value)
@@ -63,7 +63,7 @@ def get(key):
         logger.warning("event=key_not_found key=%s", key)
         raise HTTPException(status_code=404, detail="Not Found")
     except Error:
-        logger.error("event=database_error operation=get")
+        logger.exception("event=database_error operation=get key=%s", key)
         raise HTTPException(status_code=500, detail="Internal Server Error")
     logger.info("event=kv_get key=%s", key)
     return KeyValueResponse(key=key, value=read_value)
@@ -83,6 +83,6 @@ def delete(key):
         logger.warning("event=key_not_found key=%s", key)
         raise HTTPException(status_code=404, detail="Not Found")
     except Error:
-        logger.error("event=database_error operation=delete")
+        logger.exception("event=database_error operation=delete key=%s", key)
         raise HTTPException(status_code=500, detail="Internal Server Error")
     logger.info("event=kv_delete key=%s", key)
