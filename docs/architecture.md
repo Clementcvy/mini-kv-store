@@ -37,12 +37,15 @@ tests/
 The API layer is responsible for receiving HTTP requests, validating input and returning HTTP responses.
 
 Service Layer
+
 The service layer contains the application's business rules. It coordinates operations between the API and the persistence layer.
 
 Data Access Layer
+
 The data access layer contains database queries. Database communication is handled using psycopg.
 
 Database
+
 PostgreSQL is used as the relational database.
 
 5. Request Flow
@@ -77,6 +80,7 @@ Integration tests validate interactions with the database and API.
 Tests are automatically executed by GitHub Actions.
 
 7. Infrastructure
+
 Docker is used to provide consistent development and testing environments.
 The application and PostgreSQL database can be started using Docker containers.
 GitHub Actions runs the continuous integration pipeline on every push or pull request.
